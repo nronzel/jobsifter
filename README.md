@@ -50,7 +50,7 @@ python main.py --help
 
 This will show the following output:
 
-```properties
+```
 usage: main.py [-h] [-t TITLE] [-e EXCLUDE [EXCLUDE ...]] [-p PAGES] [-l LOCATION]
 
 Grab job data from job boards.
@@ -77,8 +77,7 @@ python main.py -t "software engineer" -e "jr" "junior" "intern" -p 5
 ```
 
 After running this command, it will show some console output and create a CSV
-file in the `output` directory with the job postings. The file will be named
-after the job title you provided.
+file in the project directory called `software-engineer.csv`.
 
 ## Potential Improvements
 
