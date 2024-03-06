@@ -48,17 +48,17 @@ def new_arg_parser():
         "-e",
         "--exclude",
         nargs="+",
-        help="Keywords to exclude from job title - space separated, OPTIONAL.",
+        help="OPTIONAL - Keywords to exclude from job title - space separated.",
     )
     arg_parser.add_argument(
         "-p",
         "--pages",
-        help="Number of pages to search. Default: 2, Max: 10, OPTIONAL.",
+        help="OPTIONAL - Number of pages to search. Default: 2, Max: 10.",
     )
     arg_parser.add_argument(
         "-l",
         "--location",
-        help="Location to search for jobs. Default: remote, OPTIONAL.",
+        help="OPTIONAL - Location to search for jobs. Default: remote.",
     )
     return arg_parser
 

@@ -60,11 +60,11 @@ options:
   -t TITLE, --title TITLE
                         Job title to search for.
   -e EXCLUDE [EXCLUDE ...], --exclude EXCLUDE [EXCLUDE ...]
-                        Keywords to exclude from job title - space separated, OPTIONAL.
+                        OPTIONAL - Keywords to exclude from job title - space separated.
   -p PAGES, --pages PAGES
-                        Number of pages to search. Default: 2, Max: 10, OPTIONAL.
+                        OPTIONAL - Number of pages to search. Default: 2, Max: 10.
   -l LOCATION, --location LOCATION
-                        Location to search for jobs. Default: remote, OPTIONAL.
+                        OPTIONAL - Location to search for jobs. Default: remote.
 ```
 
 ### Example
