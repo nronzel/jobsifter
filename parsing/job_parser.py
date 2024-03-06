@@ -130,7 +130,12 @@ class JobParser:
         return False
 
     def remove_duplicates(self, jobs: List[dict[str, str]]) -> List[dict[str, str]]:
-        """Remove duplicate jobs from the list of jobs"""
+        """
+        Remove duplicate jobs from the list of jobs
+        Some jobs are posted multiple times and will have different links, but
+        the same title, company, location, and salary. This method removes the
+        duplicates.
+        """
         seen = set()
         unique_jobs = []
         for job in jobs:
