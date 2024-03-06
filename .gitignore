@@ -1,0 +1,4 @@
+pyrightconfig.json
+*.csv
+.pytest.cache/
+__pycache__/
