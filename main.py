@@ -32,8 +32,10 @@ async def main():
     jobs = grabber.parser.remove_duplicates(jobs)
     # put jobs in pandas dataframe and export to csv
     df = pd.DataFrame(jobs)
-    args.title = args.title.replace(" ", "-")
-    df.to_csv(f"{args.title}.csv", index=False)
+    title = args.title.replace(" ", "-")
+    title = args.title.replace(".", "_")
+    title = title[:255]  # truncate to 255 characters
+    df.to_csv(f"{title}.csv", index=False)
 
     print(f"Found {len(jobs)} jobs.")
     print(f"Exported to {args.title}.csv")
