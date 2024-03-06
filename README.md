@@ -50,7 +50,7 @@ python main.py --help
 
 This will show the following output:
 
-```bash
+```properties
 usage: main.py [-h] [-t TITLE] [-e EXCLUDE [EXCLUDE ...]] [-p PAGES] [-l LOCATION]
 
 Grab job data from job boards.
