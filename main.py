@@ -32,12 +32,10 @@ async def main():
     # put jobs in pandas dataframe and export to csv
     df = pd.DataFrame(jobs)
     title = args.title.replace(" ", "-")
-    title = args.title.replace(".", "_")
-    title = title[:255]  # truncate to 255 characters
     df.to_csv(f"{title}.csv", index=False)
 
     print(f"Found {len(jobs)} jobs.")
-    print(f"Exported to {args.title}.csv")
+    print(f"Exported to {title}.csv")
 
 
 def new_arg_parser():
