@@ -20,42 +20,34 @@ class JobParser:
 
         for card in job_cards:
             title_element = card.find("a", class_="jcs-JobTitle")
+            if not title_element:
+                continue
+
+            href = title_element.get("href")
+            title = " ".join(title_element.stripped_strings)
+            if excluded_keywords and self._contains_excluded_keyword(
+                title, excluded_keywords
+            ):
+                continue
+
             salary_element = card.find(
                 "div", attrs={"data-testid": "attribute_snippet_testid"}
             )
             company_name = card.find("span", attrs={"data-testid": "company-name"})
             location_element = card.find("div", attrs={"data-testid": "text-location"})
 
-            if title_element:
-                href = title_element.get("href")
-                title = " ".join(title_element.stripped_strings)
-                if excluded_keywords:
-                    if self._contains_excluded_keyword(title, excluded_keywords):
-                        continue
-            else:
-                href, title = None, None
+            company = company_name.text if company_name else None
 
-            if company_name:
-                company = company_name.text
-            else:
-                company = None
-
+            salary = None
             if salary_element:
                 salary = salary_element.text
-                if "a year" in salary.lower():
-                    salary = salary.replace("a year", "/ yr")
-                if "an hour" in salary.lower():
-                    salary = salary.replace("an hour", "/ hr")
-                if salary.strip().lower() == "full-time":
+                salary = salary.replace("a year", "/ yr").replace("an hour", "/ hr")
+                if salary.strip().lower() == "full_time":
                     salary = None
-            else:
-                salary = None
-            if location_element:
-                location = location_element.text
-            else:
-                location = None
 
-            # ensure there is a title and link
+            location = location_element.text if location_element else None
+
+            # add to list of jobs if there is a title and link
             if title and href:
                 self.jobs.append(
                     {
