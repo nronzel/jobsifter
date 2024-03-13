@@ -69,37 +69,33 @@ class JobParser:
 
         for card in job_cards:
             title_element = card.find("h2", class_="font-bold")
+            if not title_element or not title_element.find("a"):
+                continue
+
+            href = title_element.find("a").get("href")
+            title = title_element.text.strip()
+            if excluded_keywords and self._contains_excluded_keyword(
+                title, excluded_keywords
+            ):
+                continue
+
             company_element = card.find("a", attrs={"data-testid": "job-card-company"})
+
+            company = company_element.text.strip() if company_element else None
+
             salary_element = card.find("div", class_="mr-8")
+            salary = None
+            if salary_element:
+                salary_text_element = salary_element.find(
+                    "p", class_="text-black normal-case text-body-md"
+                )
+                if salary_text_element:
+                    salary = salary_text_element.text.strip()
+
             location_element = card.find(
                 "p", class_="text-black normal-case text-body-md"
             )
-
-            if title_element:
-                href = title_element.find("a").get("href")
-                title = title_element.text
-                if excluded_keywords:
-                    if self._contains_excluded_keyword(title, excluded_keywords):
-                        continue
-            else:
-                href, title = None, None
-
-            if company_element:
-                company = company_element.text
-            else:
-                company = None
-
-            if salary_element:
-                salary = salary_element.find(
-                    "p", class_="text-black normal-case text-body-md"
-                ).text
-            else:
-                salary = None
-
-            if location_element:
-                location = location_element.text
-            else:
-                location = None
+            location = location_element.text.strip() if location_element else None
 
             if title and href:
                 self.jobs.append(
@@ -113,13 +109,6 @@ class JobParser:
                 )
 
         return self.jobs
-
-    def _contains_excluded_keyword(self, title, excluded_keywords: List[str]) -> bool:
-        """Check if the title contains any of the excluded keywords. If it does, return True."""
-        for keyword in excluded_keywords:
-            if keyword.lower() in title.lower():
-                return True
-        return False
 
     def remove_duplicates(self, jobs: List[dict[str, str]]) -> List[dict[str, str]]:
         """
@@ -140,3 +129,10 @@ class JobParser:
                 seen.add(hashable)
                 unique_jobs.append(job)
         return unique_jobs
+
+    def _contains_excluded_keyword(self, title, excluded_keywords: List[str]) -> bool:
+        """Check if the title contains any of the excluded keywords. If it does, return True."""
+        for keyword in excluded_keywords:
+            if keyword.lower() in title.lower():
+                return True
+        return False
