@@ -1,6 +1,5 @@
 """
-Grab job listings from job boards.
-Currently supports Indeed and ZipRecruiter.
+Description: Grab job listings from job boards. Currently supports Indeed and ZipRecruiter.
 Author: nronzel
 Github: github.com/nronzel/jobsift
 """

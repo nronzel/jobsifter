@@ -1,5 +1,3 @@
-"""Parser for job listings on Indeed and ZipRecruiter."""
-
 from typing import List, Optional
 
 

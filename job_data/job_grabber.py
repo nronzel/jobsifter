@@ -1,5 +1,3 @@
-"""JobGrabber takes a URL for a job board and grabs jobs with the provided keyword."""
-
 import asyncio
 import urllib.parse
 
